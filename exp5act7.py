@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Mar 17 07:37:58 2026
+
+@author: sakshi jadhav 
+"""
+
+# 5. Common followers between two accounts (sets)
+
+account1 = {"rahul", "sneha", "amit", "pooja"}
+account2 = {"amit", "pooja", "karan"}
+
+common_followers = account1 & account2
+
+print(common_followers)
