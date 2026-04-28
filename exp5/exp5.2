@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Mar 17 07:26:43 2026
+
+@author: sakshi jadhav 
+"""
+
+#. Library dictionary – update book price
+
+books = {"Math": 300, "Physics": 400, "Chemistry": 350}
+
+# Update price
+books["Physics"] = 450
+
+print(books)
