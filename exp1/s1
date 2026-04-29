@@ -1,0 +1,9 @@
+# Program to display name, address, and contact number
+
+name = "sakshi jadhav"
+address = "Kolhapur, Maharashtra"
+contact = 8263097645"
+print("----- Personal Details -----")
+print("Name:", name)
+print("Address:", address)
+print("Contact Number:", contact)
