@@ -1,0 +1,47 @@
+import streamlit as st
+
+# Page config
+st.set_page_config(page_title="BMI Checker", page_icon="鈿曪笍")
+
+# Title
+st.title("鈿曪笍 BMI Health Checker")
+
+# Inputs
+st.subheader("Enter your details")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    weight = st.number_input("Weight (kg)", min_value=1.0, max_value=300.0, step=0.1)
+
+with col2:
+    height = st.number_input("Height (cm)", min_value=50.0, max_value=250.0, step=0.1)
+
+# Auto calculate instead of button
+if weight > 0 and height > 0:
+    height_m = height / 100
+    bmi = weight / (height_m ** 2)
+
+    st.markdown("---")
+    st.subheader(f"Your BMI: {bmi:.2f}")
+
+    # Category logic (WHO standard)
+    if bmi < 18.5:
+        st.warning("馃數 Underweight")
+        st.info("Tip: Consider a balanced diet with more calories.")
+    elif 18.5 <= bmi < 24.9:
+        st.success("馃煝 Normal weight")
+        st.info("Great! Maintain your current lifestyle.")
+    elif 25 <= bmi < 29.9:
+        st.warning("馃煚 Overweight")
+        st.info("Tip: Regular exercise and a healthy diet can help.")
+    else:
+        st.error("馃敶 Obese")
+        st.info("Tip: Consult a healthcare provider for guidance.")
+
+else:
+    st.info("Please enter valid height and weight")
+
+# Footer
+st.markdown("---")
+st.caption("BMI is a general indicator and not a diagnostic tool.")
