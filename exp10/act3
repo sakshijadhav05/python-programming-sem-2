@@ -1,0 +1,68 @@
+mport streamlit as st
+
+st.set_page_config(page_title="Student Result Calculator", page_icon="ðŸ“Š")
+
+st.title("ðŸ“Š Student Result Calculator")
+
+# Student Name
+name = st.text_input("Enter Student Name")
+
+# Number of subjects
+num_subjects = st.number_input("Number of Subjects", min_value=1, max_value=10, step=1)
+
+st.subheader("Enter Marks")
+
+marks = []
+
+# Use session state to persist values
+for i in range(int(num_subjects)):
+    mark = st.number_input(
+        f"Subject {i+1} Marks",
+        min_value=0.0,
+        max_value=100.0,
+        step=1.0,
+        key=f"mark_{i}"
+    )
+    marks.append(mark)
+
+if st.button("Calculate Result"):
+
+    # Validation
+    if name.strip() == "":
+        st.error("Please enter student name")
+    elif len(marks) == 0:
+        st.error("Please enter marks")
+    else:
+        total = sum(marks)
+        percentage = total / num_subjects
+
+        # Grade Logic
+        if percentage >= 90:
+            grade = "A+"
+        elif percentage >= 75:
+            grade = "A"
+        elif percentage >= 60:
+            grade = "B"
+        elif percentage >= 50:
+            grade = "C"
+        elif percentage >= 35:
+            grade = "D"
+        else:
+            grade = "F"
+
+        # Pass/Fail based on individual subject condition
+        fail_count = sum(1 for m in marks if m < 35)
+
+        result = "Fail" if fail_count > 0 else "Pass"
+
+        st.success("Result Calculated Successfully!")
+
+        st.markdown("---")
+        st.write(f"**Student Name:** {name}")
+        st.write(f"**Total Marks:** {total}")
+        st.write(f"**Percentage:** {percentage:.2f}%")
+        st.write(f"**Grade:** {grade}")
+        st.write(f"**Result:** {result}")
+
+        if fail_count > 0:
+            st.warning(f"Failed in {fail_count} subject(s)")
